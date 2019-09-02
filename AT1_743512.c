@@ -130,8 +130,6 @@ void Descriptografa(char Mensagem[], ln Alfabeto[]){
 
  /* ========================================================================== */
 
-
-
     char * Incidencias = "aeosrdnitmulcvpgqbfhjxzkyw";
 
     int Tamanho = strlen(Mensagem);
@@ -145,30 +143,62 @@ void Descriptografa(char Mensagem[], ln Alfabeto[]){
         dMensagem[i].flag = 0;
     }
 
+    int i = 0 , j = 0, k = 0, Opcao;
 
-    int j = 0;
-    int k = 0;
-    while(j < 26){
+    char Auxiliar;
 
-        for(int i = 0; i < Tamanho; i++){
-            // printf("%c %c", dMensagem[i].Letra, tAlfabeto[i].Letra);
+    while(j < 26 && k < 26){
+
+        // printf("j %d\n\n", j);
+
+        for(i = 0; i < Tamanho; i++){
+
             if(dMensagem[i].Letra == tAlfabeto[j].Letra && dMensagem[j].flag == 0){
 
-                // printf("%c\n", dMensagem[i].Letra);
-                // printf("%c\n", tAlfabeto[i].Letra);
+                Auxiliar = dMensagem[i].Letra; 
+
+                // printf("Letra CIFRADA %c\n", dMensagem[i].Letra);
+                // printf("Letra DECIFRADA %c\n", Incidencias[k]);
 
                 dMensagem[i].Letra = Incidencias[k];
                 // printf("%c\n", Incidencias[k]);
-                dMensagem[i].flag = 1; 
 
+                dMensagem[i].flag = 1; 
             }
+            
         }
+
+        // for(int l = 0; l < Tamanho; l++)
+        //     printf("%c", dMensagem[l].Letra);
+        // printf("\n");
+        
+        // scanf("%d", &Opcao);
+
+        // switch (Opcao){
+        //     case 0:
+        //         break;
+
+        //     case 1:
+        //         printf("\n Case 1 \n");
+        //         for(i = 0; i < Tamanho; i++){
+        //             if(dMensagem[i].Letra == Incidencias[k] && dMensagem[j].flag == 1){
+        //                 dMensagem[i].Letra = Auxiliar;
+        //                 dMensagem[i].flag = 0;
+        //             }
+        //         }
+        //         for(int l = 0; l < Tamanho; l++)
+        //             printf("%c", dMensagem[l].Letra);
+        //         printf("\n");
+                
+        //         break;            
+        // }
         j++;
         k++;
+
     }
 
-     for(int i = 0; i < Tamanho; i++){
+    for(int i = 0; i < Tamanho; i++)
         printf("%c", dMensagem[i].Letra);
-    }
+    
 
 }
