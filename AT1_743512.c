@@ -53,7 +53,7 @@ int main(){
     // Imprime(Alfabeto);
 
     // Alfabeto temporário ordenado por incidência
-    Imprime_Ordem_Incidencia(Alfabeto);
+    // Imprime_Ordem_Incidencia(Alfabeto);
 
     Descriptografa(Mensagem, Alfabeto);
 
@@ -128,6 +128,10 @@ void Descriptografa(char Mensagem[], ln Alfabeto[]){
         }
     }
 
+    printf("\nINCIDENCIA\n\n");
+
+    Imprime(tAlfabeto);
+
  /* ========================================================================== */
 
     char * Incidencias = "aeosrdnitmulcvpgqbfhjxzkyw";
@@ -135,70 +139,129 @@ void Descriptografa(char Mensagem[], ln Alfabeto[]){
     int Tamanho = strlen(Mensagem);
     // printf("%d", Tamanho);
 
-    dMensagem dMensagem[Tamanho];
+    dMensagem descMensagem[Tamanho];
 
     for(int i = 0; i < Tamanho; i++){
-        dMensagem[i].Letra = Mensagem[i];
-        // printf("%c", dMensagem[i].Letra);
-        dMensagem[i].flag = 0;
+        descMensagem[i].Letra = Mensagem[i];
+        // printf("%c", descMensagem[i].Letra);
+        descMensagem[i].flag = 0;
     }
 
-    int i = 0 , j = 0, k = 0, Opcao;
+ /* ========================================================================== */
 
-    char Auxiliar;
+    printf("\nFREQUENCIA RELATIVA DAS LETRAS\n");
 
-    while(j < 26 && k < 26){
+    for(int i = 0; i < 26; i++)
+        printf("%c ", Incidencias[i]);
+    printf("\n\n");
 
-        // printf("j %d\n\n", j);
+    char L;
 
-        for(i = 0; i < Tamanho; i++){
+    dMensagem mensagemAuxiliar[Tamanho];
 
-            if(dMensagem[i].Letra == tAlfabeto[j].Letra && dMensagem[j].flag == 0){
-
-                Auxiliar = dMensagem[i].Letra; 
-
-                // printf("Letra CIFRADA %c\n", dMensagem[i].Letra);
-                // printf("Letra DECIFRADA %c\n", Incidencias[k]);
-
-                dMensagem[i].Letra = Incidencias[k];
-                // printf("%c\n", Incidencias[k]);
-
-                dMensagem[i].flag = 1; 
-            }
-            
+    int j = 0, Opcao;
+    while(j < 26){
+        printf("\nLetra CIFRADA: %c\n", tAlfabeto[j].Letra);
+        
+        printf("Insira uma Letra:\n");
+        
+        getchar();
+        scanf("%c", &L);
+        
+         for(int i = 0; i < Tamanho; i++){
+            mensagemAuxiliar[i].Letra = descMensagem[i].Letra;
+            mensagemAuxiliar[i].flag = descMensagem[i].flag;
         }
 
-        // for(int l = 0; l < Tamanho; l++)
-        //     printf("%c", dMensagem[l].Letra);
-        // printf("\n");
-        
-        // scanf("%d", &Opcao);
 
-        // switch (Opcao){
-        //     case 0:
-        //         break;
+        printf("Letra DECIFRADA: %c\n", L);
 
-        //     case 1:
-        //         printf("\n Case 1 \n");
-        //         for(i = 0; i < Tamanho; i++){
-        //             if(dMensagem[i].Letra == Incidencias[k] && dMensagem[j].flag == 1){
-        //                 dMensagem[i].Letra = Auxiliar;
-        //                 dMensagem[i].flag = 0;
-        //             }
-        //         }
-        //         for(int l = 0; l < Tamanho; l++)
-        //             printf("%c", dMensagem[l].Letra);
-        //         printf("\n");
+        for(int i = 0; i < Tamanho; i++){
+            if(descMensagem[i].Letra == tAlfabeto[j].Letra && descMensagem[i].flag == 0){
+
+                descMensagem[i].Letra = L;
+                descMensagem[i].flag = 1;
+            }
+        }    
+
+        printf("\nMENSAGEM\n");
+
+        for(int i = 0; i < Tamanho; i++)
+            printf("%c", descMensagem[i].Letra);
+
+        printf("\n\n");
+
+        printf("REVERTER?\n");
+        scanf("%d", &Opcao);
+
+        if(Opcao == 1 ){
+
+ /* ========================================================================== */
+            while(Opcao != 0){
+
+                for(int i = 0; i < Tamanho; i++){
+                    descMensagem[i].Letra = mensagemAuxiliar[i].Letra;
+                    descMensagem[i].flag = 0;
+                }
+
+                // printf("\nMENSAGEM\n");
+
+                // for(int i = 0; i < Tamanho; i++)
+                //     printf("%c", descMensagem[i].Letra);
+
+                // printf("\n\n");
+
+                printf("Letra CIFRADA: %c\n", tAlfabeto[j].Letra);
                 
-        //         break;            
-        // }
+                printf("Insira uma Letra:\n");
+                
+                getchar();
+                scanf("%c", &L);
+                
+                printf("Letra DECIFRADA: %c\n", L);
+
+                for(int i = 0; i < Tamanho; i++){
+                    if(descMensagem[i].Letra == tAlfabeto[j].Letra && descMensagem[i].flag == 0){
+
+                        descMensagem[i].Letra = L;
+                        descMensagem[i].flag = 1;
+                    }
+                }    
+
+                printf("\nMENSAGEM\n");
+
+                for(int i = 0; i < Tamanho; i++)
+                    printf("%c", descMensagem[i].Letra);
+
+                printf("\n\n");
+
+                printf("REVERTER?\n");
+                scanf("%d", &Opcao);
+
+                if(Opcao == 0)
+                    break;
+                else    
+                    for(int i = 0; i < Tamanho; i++){
+                        descMensagem[i].Letra = mensagemAuxiliar[i].Letra;
+                        descMensagem[i].flag = 0;
+                    }
+
+            }
+ /* ========================================================================== */
+
+        }
         j++;
-        k++;
+        
+        
 
+        // printf("\nMENSAGEM\n");
+
+        // for(int i = 0; i < Tamanho; i++)
+        //     printf("%c", descMensagem[i].Letra);
+
+        // printf("\n\n");
+
+        
     }
-
-    for(int i = 0; i < Tamanho; i++)
-        printf("%c", dMensagem[i].Letra);
-    
 
 }
