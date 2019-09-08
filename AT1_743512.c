@@ -30,6 +30,8 @@ void Inicializa(ln *Alfabeto);
 
 void Descriptografa(char Mensagem[], ln Alfabeto[]);
 
+void Descriptografa_Automatico(char Mensagem[], ln Alfabeto[]);
+
 int main(){
 
     char Mensagem[4096];
@@ -55,7 +57,8 @@ int main(){
     // Alfabeto temporário ordenado por incidência
     // Imprime_Ordem_Incidencia(Alfabeto);
 
-    Descriptografa(Mensagem, Alfabeto);
+    // Descriptografa(Mensagem, Alfabeto);
+    Descriptografa_Automatico(Mensagem, Alfabeto);
 
     return 0;
 
@@ -134,7 +137,8 @@ void Descriptografa(char Mensagem[], ln Alfabeto[]){
 
  /* ========================================================================== */
 
-    char * Incidencias = "aeosrdnitmulcvpgqbfhjxzkyw";
+    // char * Incidencias = "aeosrdnitmulcvpgqbfhjxzkyw";
+    char * Incidencias = "aeosrindtmuclvpgqbfhjxzkyw";
 
     int Tamanho = strlen(Mensagem);
     // printf("%d", Tamanho);
@@ -262,6 +266,77 @@ void Descriptografa(char Mensagem[], ln Alfabeto[]){
         // printf("\n\n");
 
         
+    }
+
+}
+
+void Descriptografa_Automatico(char Mensagem[], ln Alfabeto[]){
+
+/* ========================================================================== */
+
+    ln tAlfabeto[26];
+    for(int i = 0; i < 26; i++){
+        tAlfabeto[i].Letra = Alfabeto[i].Letra;
+        tAlfabeto[i].Num = Alfabeto[i].Num; 
+    }
+
+    // BubbleSort 
+    for(int i = 26; i >= 0; i--){
+        for(int j = 1; j < i; j++){
+            if(tAlfabeto[j-1].Num < tAlfabeto[j].Num){
+                ln Auxiliar = tAlfabeto[j-1];
+                tAlfabeto[j-1] = tAlfabeto[j];
+                tAlfabeto[j] = Auxiliar;
+            }
+        }
+    }
+
+    printf("\n");
+    Imprime(tAlfabeto);
+
+
+ /* ========================================================================== */
+
+    // char * Incidencias = "aeosrdnitmulcvpgqbfhjxzkyw";
+    char * Incidencias = "aeosrindtmuclpgqvbfhjzxkyw";
+
+    int Tamanho = strlen(Mensagem);
+    // printf("%d", Tamanho);
+
+    dMensagem dMensagem[Tamanho];
+
+    for(int i = 0; i < Tamanho; i++){
+        dMensagem[i].Letra = Mensagem[i];
+        // printf("%c", dMensagem[i].Letra);
+        dMensagem[i].flag = 0;
+    }
+
+
+    int j = 0;
+    int k = 0;
+    while(j < 26 && k < 26){
+
+        for(int i = 0; i < Tamanho; i++){
+            // printf("%c %c", dMensagem[i].Letra, tAlfabeto[i].Letra);
+            if(dMensagem[i].Letra == tAlfabeto[j].Letra && dMensagem[i].flag == 0){
+
+                // printf("%c\n", dMensagem[i].Letra);
+                // printf("%c\n", tAlfabeto[i].Letra);
+
+                dMensagem[i].Letra = Incidencias[k];
+                // printf("%c - %c", dMensagem[i].Letra, Incidencias[k]);
+                dMensagem[i].flag = 1; 
+
+            }
+        }
+
+        j++;
+        k++;
+    }
+
+    printf("\n");
+     for(int i = 0; i < Tamanho; i++){
+        printf("%c", dMensagem[i].Letra);
     }
 
 }
