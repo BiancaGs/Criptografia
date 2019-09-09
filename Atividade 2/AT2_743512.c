@@ -55,9 +55,9 @@ int main(){
         tMensagem[i + 1] = '\0';
     }
 
-
+    strcpy(Mensagem, tMensagem);
     
-    printf("\nMENSAGEM\n%s\n\n", Mensagem);
+    // printf("\nMENSAGEM\n%s\n\n", tMensagem);
 
     Inicializa(S, Key);
 
@@ -65,7 +65,7 @@ int main(){
     
     printf("RESULTADO\n");
     for(int i = 0; i < strlen(Resultado); i++)
-        printf("%x", Resultado[i]);
+        printf("%c", Resultado[i]);
 
     return 0;
 }
