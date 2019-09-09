@@ -33,13 +33,16 @@ int main(){
     memset(Mensagem, '\0', 256);
     memset(S, '\0', 256);
 
-    scanf("%[^\n]", Key);
-
+    printf("CHAVE\n");
+    // getchar();
+    scanf("%[^\n]x", Key);
     getchar();
 
-    scanf("%[^\n]", Mensagem);
+    printf("MENSAGEM\n");
+    // getchar();
+    scanf("%[^\n]x", Mensagem);
 
-
+    
     printf("\nMENSAGEM\n%s\n\n", Mensagem);
 
     Inicializa(S, Key);
