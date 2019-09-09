@@ -16,7 +16,9 @@ void Inicializa(unsigned char *S, char Key[]);
 
 void swap(unsigned char *sI, unsigned char *sJ);
 
-char *geraFluxo(char Mensagem[],unsigned  char S[]);
+unsigned char *geraFluxo(char Mensagem[],unsigned  char S[]);
+
+// void Imprimir(unsigned char Resultado[]);
 
 int main(){
     
@@ -31,22 +33,22 @@ int main(){
     memset(Mensagem, '\0', 256);
     memset(S, '\0', 256);
 
-    scanf("%[^\n]x", Key);
+    scanf("%[^\n]", Key);
 
     getchar();
 
-    scanf("%[^\n]x", Mensagem);
+    scanf("%[^\n]", Mensagem);
 
 
     printf("\nMENSAGEM\n%s\n\n", Mensagem);
 
     Inicializa(S, Key);
 
-    char *Resultado = geraFluxo(Mensagem, S);
-
+    unsigned char *Resultado = geraFluxo(Mensagem, S);
+    
     printf("RESULTADO\n");
     for(int i = 0; i < strlen(Resultado); i++)
-        printf("%X", Resultado[i]);
+        printf("%x", Resultado[i]);
 
     return 0;
 }
@@ -88,7 +90,14 @@ void Inicializa( unsigned char *S, char Key[]){
     
 }
 
-char *geraFluxo(char Mensagem[], unsigned char S[]){
+// void Imprimir(unsigned char Resultado[]){
+
+//     printf("RESULTADO\n");
+//     for(int i = 0; i < strlen(Resultado); i++)
+//         printf("%X", Resultado[i]);
+// }
+
+unsigned char *geraFluxo(char Mensagem[], unsigned char S[]){
 
     unsigned char *Resultado = (char*) malloc (256 * sizeof (char));
     memset(Resultado, '\0', 256);
@@ -110,4 +119,6 @@ char *geraFluxo(char Mensagem[], unsigned char S[]){
     }
 
     return Resultado;
+
+    // Imprimir(Resultado);
 }
