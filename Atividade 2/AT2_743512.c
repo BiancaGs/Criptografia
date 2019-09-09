@@ -35,12 +35,26 @@ int main(){
 
     printf("CHAVE\n");
     // getchar();
-    scanf("%[^\n]x", Key);
+    scanf("%[^\n]", &Key);
     getchar();
 
     printf("MENSAGEM\n");
     // getchar();
-    scanf("%[^\n]x", Mensagem);
+    scanf("%[^\n]", &Mensagem);
+
+
+    // Converte de HEXADECIMAL para STRING
+
+    int Tamanho = strlen(Mensagem);
+    char *tMensagem = (char*) malloc (256 * sizeof (char));
+
+    for (int i = 0, j = 0; j < Tamanho; ++i, j += 2) {
+        int val[1];
+        sscanf(Mensagem + j, "%2x", val);
+        tMensagem[i] = val[0];
+        tMensagem[i + 1] = '\0';
+    }
+
 
     
     printf("\nMENSAGEM\n%s\n\n", Mensagem);
