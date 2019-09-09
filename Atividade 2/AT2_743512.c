@@ -1,7 +1,7 @@
 /* ==========================================================================
  * Universidade Federal de São Carlos - Campus Sorocaba
  *
- * Atividade 01
+ * Atividade 02 - RC4
  *
  * RA: 743512
  * Aluno: Bianca Gomes Rodrigues
@@ -42,32 +42,53 @@ int main(){
     // getchar();
     scanf("%[^\n]", &Mensagem);
 
+    int Opcao;
+    printf("\nSelecione uma opcao\n(0) Criptografar\n(1) Descriptografar\n");
+    scanf("%d", &Opcao);
+    printf("\n");
 
-    // Converte de HEXADECIMAL para STRING
+    if(Opcao == 1){
 
-    int Tamanho = strlen(Mensagem);
-    char *tMensagem = (char*) malloc (256 * sizeof (char));
+        // =============================================
 
-    for (int i = 0, j = 0; j < Tamanho; ++i, j += 2) {
-        int val[1];
-        sscanf(Mensagem + j, "%2x", val);
-        tMensagem[i] = val[0];
-        tMensagem[i + 1] = '\0';
+        // Converte de HEXADECIMAL para STRING
+
+        int Tamanho = strlen(Mensagem);
+        char *tMensagem = (char*) malloc (256 * sizeof (char));
+
+        for (int i = 0, j = 0; j < Tamanho; ++i, j += 2) {
+            int val[1];
+            sscanf(Mensagem + j, "%2x", val);
+            tMensagem[i] = val[0];
+            tMensagem[i + 1] = '\0';
+        }
+        // =============================================
+
+        strcpy(Mensagem, tMensagem);
+
     }
-
-    strcpy(Mensagem, tMensagem);
     
     // printf("\nMENSAGEM\n%s\n\n", tMensagem);
 
     Inicializa(S, Key);
 
     unsigned char *Resultado = geraFluxo(Mensagem, S);
+
+    if(Opcao == 1){
     
+        printf("RESULTADO\n");
+        for(int i = 0; i < strlen(Resultado); i++)
+            printf("%c", Resultado[i]);
+
+        return 0;
+    }
+
     printf("RESULTADO\n");
     for(int i = 0; i < strlen(Resultado); i++)
-        printf("%c", Resultado[i]);
+        printf("%x", Resultado[i]);
 
     return 0;
+    
 }
 
 void swap(unsigned char *sI, unsigned char *sJ){
@@ -111,7 +132,7 @@ void Inicializa( unsigned char *S, char Key[]){
 
 //     printf("RESULTADO\n");
 //     for(int i = 0; i < strlen(Resultado); i++)
-//         printf("%X", Resultado[i]);
+//         printf("%x", Resultado[i]);
 // }
 
 unsigned char *geraFluxo(char Mensagem[], unsigned char S[]){
