@@ -1,7 +1,7 @@
 /* ==========================================================================
  * Universidade Federal de São Carlos - Campus Sorocaba
  *
- * Atividade 02 - RC4
+ * P1Q2 - RC4
  *
  * RA: 743512
  * Aluno: Bianca Gomes Rodrigues
@@ -54,12 +54,13 @@ int main(){
         // Converte de HEXADECIMAL para STRING
 
         int Tamanho = strlen(Mensagem);
-        char *tMensagem = (char*) malloc (256 * sizeof (char));
+        char tMensagem[256];
+        memset(tMensagem, '\0', 256);
 
         for (int i = 0, j = 0; j < Tamanho; ++i, j += 2) {
-            int val[1];
-            sscanf(Mensagem + j, "%2x", val);
-            tMensagem[i] = val[0];
+            int Valor[1];
+            sscanf(Mensagem + j, "%2x", Valor);
+            tMensagem[i] = Valor[0];
             tMensagem[i + 1] = '\0';
         }
         // =============================================
